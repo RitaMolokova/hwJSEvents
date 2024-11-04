@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task 2</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #mainDiv {
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <div id="mainDiv"></div>
+   
+    <script>
+    let div = document.querySelector("#mainDiv"); 
+        let o = false;
+        let offsetX, offsetY;
+        div.addEventListener("mousedown", function (e) {
+            o = true;
+            offsetX = e.offsetX;
+            offsetY = e.offsetY;
+        });
+        document.addEventListener("mousemove", function (e) {
+            if (o) 
+            {
+                div.style.top = (e.clientY - offsetY) + "px";
+                div.style.left = (e.clientX - offsetX) + "px";
+            } else 
+            {
+                div.textContent = `X = ${e.clientX}, Y = ${e.clientY}`;
+            }
+        });
+        document.addEventListener("mouseup", function () {
+            o = false;
+        });
+        div.addEventListener("click", function (e) {
+            let button;
+            if (e.button === 0) 
+            {
+                button = "Left";
+            } 
+            else if (e.button === 2) 
+            {
+                button = "Right";
+            }
+            div.textContent = `${button} mouse \t X = ${e.clientX}, Y = ${e.clientY}`;
+        });
+        div.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
